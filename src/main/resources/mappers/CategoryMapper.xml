@@ -12,9 +12,11 @@
         <result column="create_time" property="createTime" jdbcType="DATE"/>
         <result column="update_time" property="updateTime" jdbcType="DATE"/>
     </resultMap>
+    <sql id="BaseColumn">id, parent_id, name, status, sort_order, create_time, update_time</sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseResult">
-        select * from mall_category where id = #{id}
+        select <include refid="BaseColumn"/>
+        from mall_category where id = #{id}
     </select>
 
 
