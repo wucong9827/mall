@@ -2,7 +2,10 @@ package com.demo.mall.service.impl;
 
 import com.demo.mall.MallApplicationTest;
 import com.demo.mall.entity.User;
+import com.demo.mall.enums.ResponseEnum;
 import com.demo.mall.service.IUserService;
+import com.demo.mall.vo.ResponseVo;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,5 +32,9 @@ public class UserServiceImplTest extends MallApplicationTest {
         iUserService.register(user);
     }
 
-
+    @Test
+    public void login() {
+        ResponseVo responseVo = iUserService.login("admin", "admin");
+        Assert.assertEquals(ResponseEnum.SUCCESS.getCode(), responseVo.getStatus());
+    }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 /**
  * @author wucong
@@ -29,7 +30,6 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public ResponseVo register(User user) {
-
         // 1.校验用户名
         int countByUsername = userMapper.countByUsername(user.getUsername());
         if (countByUsername > 0) {
@@ -53,5 +53,20 @@ public class UserServiceImpl implements IUserService {
         return ResponseVo.success();
     }
 
-
+    @Override
+    public ResponseVo<User> login(String username, String password) {
+        // 1.查询用户
+        User user = userMapper.selectByUsername(username);
+        if (Objects.isNull(user)) {
+            // 用户未注册
+            return ResponseVo.error(ResponseEnum.USERNAME_OR_PASSWORD_ERROR);
+        }
+        // 2.校验密码,忽略大小写
+        if (!user.getPassword().equalsIgnoreCase(DigestUtils.md5DigestAsHex(
+                password.getBytes(StandardCharsets.UTF_8)))) {
+            return ResponseVo.error(ResponseEnum.PASSWORD_ERROR);
+        }
+        user.setPassword(null);
+        return ResponseVo.success(user);
+    }
 }

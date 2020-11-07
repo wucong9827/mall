@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * @author wucong
  * @date 2020/10/29 19:29
@@ -19,6 +21,9 @@ public interface CategoryMapper {
      */
     Category selectByPrimaryKey(@Param("id") Integer id);
 
-
-
+    /**
+     * 获取数据库中所有的条目
+     * @return
+     */
+    List<Category> selectAll();
 }
