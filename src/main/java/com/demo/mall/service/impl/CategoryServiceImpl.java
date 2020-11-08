@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author wucong
@@ -45,6 +46,21 @@ public class CategoryServiceImpl implements ICategoryService {
         log.info("子目录组装...");
         findSubCategory(categoryVos, categories);
         return ResponseVo.success(categoryVos);
+    }
+
+    @Override
+    public void findSubCategoryId(Integer categoryId, Set<Integer> categorySet) {
+        List<Category> categories = categoryMapper.selectAll();
+        findSubCategoryId(categoryId, categories, categorySet);
+    }
+
+    public void findSubCategoryId(Integer categoryId, List<Category> categories, Set<Integer> categorySet) {
+        for (Category category : categories) {
+            if (category.getId().equals(categoryId)) {
+                categorySet.add(category.getId());
+                findSubCategoryId(category.getId(), categories, categorySet);
+            }
+        }
     }
 
     /**

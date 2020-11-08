@@ -1,8 +1,13 @@
 package com.demo.mall.dao;
 
 import com.demo.mall.entity.Product;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Set;
 
 public interface ProductMapper {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Product record);
@@ -14,4 +19,6 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    List<Product> selectByCategoryIdSet(@Param("categoryIdSet") Set<Integer> categoryIdSet);
 }

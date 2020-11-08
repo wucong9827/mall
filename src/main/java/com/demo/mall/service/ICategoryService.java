@@ -4,6 +4,7 @@ import com.demo.mall.vo.CategoryVo;
 import com.demo.mall.vo.ResponseVo;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author wucong
@@ -18,5 +19,10 @@ public interface ICategoryService {
      */
     ResponseVo<List<CategoryVo>> selectAll();
 
-
+    /**
+     * 获取子类目
+     * @param categoryId
+     * @param categorySet
+     */
+    void findSubCategoryId(Integer categoryId, Set<Integer> categorySet);
 }
