@@ -188,5 +188,18 @@
     </if>
   </select>
 
+  <select id="selectByProductIdSet" resultMap="BaseResultMap" parameterType="java.util.Set">
+    select <include refid="Base_Column_List"/>
+    from mall_product
+    <where>
+      <if test="productIdSet.size() > 0">
+        id in
+        <foreach collection="productIdSet" index="index"
+                 item="item" open="(" separator="," close=")">
+          ${item}
+        </foreach>
+      </if>
+    </where>
+  </select>
 
 </mapper>
