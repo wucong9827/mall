@@ -1,8 +1,13 @@
 package com.demo.mall.entity;
 
+import lombok.Builder;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * @author wucong
+ */
 public class OrderItem {
     private Integer id;
 

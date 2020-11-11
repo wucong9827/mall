@@ -4,6 +4,7 @@ import com.demo.mall.entity.Shipping;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ShippingMapper {
 
@@ -23,4 +24,9 @@ public interface ShippingMapper {
                          @Param("shippingId") Integer shippingId);
 
     List<Shipping> selectByUid(Integer uid);
+
+    Shipping selectByUidAndShippingId(@Param("uid") Integer uid,
+                                      @Param("shippingId") Integer shippingId);
+
+    List<Shipping> selectByIdSet(@Param("shippingIdSet") Set<Integer> shippingIdSet);
 }

@@ -1,8 +1,11 @@
 package com.demo.mall.entity;
 
+import lombok.Builder;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Builder
 public class Order {
     private Integer id;
 
