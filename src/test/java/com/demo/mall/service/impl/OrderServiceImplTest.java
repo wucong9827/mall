@@ -33,6 +33,7 @@ public class OrderServiceImplTest extends MallApplicationTest {
 
     @Test
     public void detail() {
+        log.info("{}", gson.toJson(orderService.detail(1, 1605067314743L)));
     }
 
     @Test
